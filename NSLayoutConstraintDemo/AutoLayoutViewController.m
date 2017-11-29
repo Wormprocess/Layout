@@ -1,0 +1,146 @@
+//
+//  ViewController.m
+//  NSLayoutConstraintDemo
+//
+//  Created by Tsunami on 2017/11/20.
+//  Copyright © 2017年 Tsunami. All rights reserved.
+//
+
+#import "AutoLayoutViewController.h"
+
+#define kTop (self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height)
+
+@interface AutoLayoutViewController ()
+
+
+@end
+
+@implementation AutoLayoutViewController
+
+- (void)setup1
+{
+    
+    UIView * superview = [[UIView alloc]init];
+    superview.backgroundColor = [UIColor orangeColor];
+    [self.view addSubview:superview];
+    
+    UIView * view1 = [[UIView alloc]init];
+    view1.backgroundColor = [UIColor cyanColor];
+    [superview addSubview:view1];
+
+    UIView * view2 = [[UIView alloc]init];
+    view2.backgroundColor = [UIColor magentaColor];
+    [superview addSubview:view2];
+
+    UIView * view3 = [[UIView alloc]init];
+    view3.backgroundColor = [UIColor cyanColor];
+    [superview addSubview:view3];
+    
+    superview.translatesAutoresizingMaskIntoConstraints = NO;
+    view1.translatesAutoresizingMaskIntoConstraints = NO;
+    view2.translatesAutoresizingMaskIntoConstraints = NO;
+    view3.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSLayoutConstraint * super_left = [NSLayoutConstraint constraintWithItem:superview attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1 constant:10];
+    
+    NSLayoutConstraint * super_top = [NSLayoutConstraint constraintWithItem:superview attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:kTop + 10];
+    
+    NSLayoutConstraint * super_right = [NSLayoutConstraint constraintWithItem:superview attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeRight multiplier:1 constant:-10];
+    
+    NSLayoutConstraint * super_height = [NSLayoutConstraint constraintWithItem:superview attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:80];
+    
+    [self.view addConstraints:@[super_left,super_top,super_right,super_height]];
+    //H
+   
+    NSLayoutConstraint * view1_left = [NSLayoutConstraint constraintWithItem:view1 attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeLeft multiplier:1 constant:10];
+    
+    NSLayoutConstraint * view2_left = [NSLayoutConstraint constraintWithItem:view2 attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:view1 attribute:NSLayoutAttributeRight multiplier:1 constant:10];
+    
+    NSLayoutConstraint * view3_left = [NSLayoutConstraint constraintWithItem:view3 attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:view2 attribute:NSLayoutAttributeRight multiplier:1 constant:10];
+    
+    NSLayoutConstraint * view3_right = [NSLayoutConstraint constraintWithItem:view3 attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeRight multiplier:1 constant:-10];
+    
+    NSLayoutConstraint * width1 = [NSLayoutConstraint constraintWithItem:view2 attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:view1 attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
+    
+    NSLayoutConstraint * width2 = [NSLayoutConstraint constraintWithItem:view3 attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:view1 attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
+    
+    //V
+    NSLayoutConstraint * view1_top = [NSLayoutConstraint constraintWithItem:view1 attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeTop multiplier:1 constant:10];
+    
+    NSLayoutConstraint * view1_bottom = [NSLayoutConstraint constraintWithItem:view1 attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeBottom multiplier:1 constant:-10];
+    
+    NSLayoutConstraint * view2_top = [NSLayoutConstraint constraintWithItem:view2 attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeTop multiplier:1 constant:10];
+    
+    NSLayoutConstraint * view3_top = [NSLayoutConstraint constraintWithItem:view3 attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeTop multiplier:1 constant:10];
+    
+    NSLayoutConstraint * height1 = [NSLayoutConstraint constraintWithItem:view2 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:view1 attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
+    
+    NSLayoutConstraint * height2 = [NSLayoutConstraint constraintWithItem:view3 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:view1 attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
+    
+    [superview addConstraints:@[view1_left,view2_left,view3_left,view3_right,width1,width2]];
+    [superview addConstraints:@[view1_top,view1_bottom,view2_top,view3_top,height1,height2]];
+    
+}
+
+- (void)setupVFL
+{
+    UIView * superview = [[UIView alloc]init];
+    superview.backgroundColor = [UIColor redColor];
+    [self.view addSubview:superview];
+    
+    UIView * view1 = [[UIView alloc]init];
+    view1.backgroundColor = [UIColor cyanColor];
+    [superview addSubview:view1];
+    
+    UIView * view2 = [[UIView alloc]init];
+    view2.backgroundColor = [UIColor magentaColor];
+    [superview addSubview:view2];
+    
+    UIView * view3 = [[UIView alloc]init];
+    view3.backgroundColor = [UIColor cyanColor];
+    [superview addSubview:view3];
+    
+    superview.translatesAutoresizingMaskIntoConstraints = NO;
+    view1.translatesAutoresizingMaskIntoConstraints = NO;
+    view2.translatesAutoresizingMaskIntoConstraints = NO;
+    view3.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSDictionary * metrics = @{@"space":@10};
+    NSDictionary * views = NSDictionaryOfVariableBindings(superview,view1,view2,view3);
+    NSString * sup_hvflstr = @"H:|-space-[superview]-space-|";
+    NSArray * sup_hvfl = [NSLayoutConstraint constraintsWithVisualFormat:sup_hvflstr options:0 metrics:metrics views:views];
+    NSString * sup_vvflstr = @"V:|-190-[superview(100)]";
+    NSArray * sup_vvfl = [NSLayoutConstraint constraintsWithVisualFormat:sup_vvflstr options:0 metrics:metrics views:views];
+    [self.view addConstraints:sup_hvfl];
+    [self.view addConstraints:sup_vvfl];
+    
+    NSString * subhvflstr = @"H:|-space-[view1]-space-[view2(==view1)]-space-[view3(==view1)]-space-|";
+    NSArray * sub_hvfl = [NSLayoutConstraint constraintsWithVisualFormat:subhvflstr options:NSLayoutFormatAlignAllTop|NSLayoutFormatAlignAllBottom metrics:metrics views:views];
+    NSString * subvvflstr1 = @"V:|-space-[view1]-space-|";
+    
+    NSArray * sub_vvfl1 = [NSLayoutConstraint constraintsWithVisualFormat:subvvflstr1 options:0 metrics:metrics views:views];
+    [superview addConstraints:sub_hvfl];
+    [superview addConstraints:sub_vvfl1];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor colorWithRed:122/255.0 green:207/255.0 blue:166/255.0 alpha:1];
+    
+    [self setup1];
+    [self setupVFL];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+@end
