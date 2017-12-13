@@ -7,7 +7,7 @@
 //
 
 #import "AutoLayoutViewController.h"
-
+#import "AutoTableViewController.h"
 #define kTop (self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height)
 
 @interface AutoLayoutViewController ()
@@ -125,13 +125,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationItem.title = @"NSLayoutConstraint";
     self.view.backgroundColor = [UIColor colorWithRed:122/255.0 green:207/255.0 blue:166/255.0 alpha:1];
     
     [self setup1];
     [self setupVFL];
+    
+    UIButton * btn = [[UIButton alloc]init];
+    [btn setTitle:@"NEXT" forState:UIControlStateNormal];
+    [self.view addSubview:btn];
+    btn.translatesAutoresizingMaskIntoConstraints = NO;
+    [btn addTarget:self action:@selector(next) forControlEvents:UIControlEventTouchUpInside];
+    
+    NSString * btnH_VFL = @"H:[btn(100)]-10-|";
+    NSString * btnV_VFL = @"V:[btn(40)]-100-|";
+    NSDictionary * views = NSDictionaryOfVariableBindings(btn);
+    NSArray * h_layout = [NSLayoutConstraint constraintsWithVisualFormat:btnH_VFL options:0 metrics:nil views:views];
+    NSArray * v_layout = [NSLayoutConstraint constraintsWithVisualFormat:btnV_VFL options:0 metrics:nil views:views];
+    
+    [self.view addConstraints:h_layout];
+    [self.view addConstraints:v_layout];
+    
+    
 }
 
+- (void)next
+{
+    AutoTableViewController * vc = [[AutoTableViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];

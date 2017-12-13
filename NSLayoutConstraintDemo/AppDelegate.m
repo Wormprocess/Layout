@@ -16,10 +16,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-   
-    [UINavigationBar appearance].translucent = YES;
-    [UINavigationBar appearance].barTintColor = [UIColor blackColor];
     
+    [UINavigationBar appearance].barTintColor = [UIColor redColor];
+    [UINavigationBar appearance].backgroundColor = [UIColor redColor];
     return YES;
 }
 
