@@ -146,7 +146,38 @@
     [self.view addConstraints:h_layout];
     [self.view addConstraints:v_layout];
     
+    //居中的方法,居中偏移还没有找到
     
+#warning 水平反向约束时对齐方式options选top,bottom,cententY或为0，竖直方向反之
+    
+    UIButton * next = [UIButton buttonWithType:UIButtonTypeCustom];
+    [next setTitle:@"next" forState:UIControlStateNormal];
+    next.backgroundColor = [UIColor blueColor];
+    [self.view addSubview:next];
+    next.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(50, 30), YES, 0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [UIColor redColor].CGColor);
+    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [next setImage:image forState:UIControlStateNormal];
+    
+    NSString * h_vflstr = @"H:[next(100)][superView]";
+    
+    NSDictionary * views1 = @{@"next":next,@"superView":self.view};
+    
+    NSArray * h_vfl = [NSLayoutConstraint constraintsWithVisualFormat:h_vflstr options:NSLayoutFormatAlignAllCenterY metrics:nil views:views1];
+    
+    NSString * v_vflstr = @"V:[next(100)][superView]";
+    
+    NSArray * v_vfl = [NSLayoutConstraint constraintsWithVisualFormat:v_vflstr options:NSLayoutFormatAlignAllCenterX metrics:nil views:views1];
+    
+    [self.view addConstraints:h_vfl];
+    [self.view addConstraints:v_vfl];
+    
+
 }
 
 - (void)next
