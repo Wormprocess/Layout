@@ -15,6 +15,8 @@
 		9DEA2CA41FC2F2A000541011 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA2CA31FC2F2A000541011 /* main.m */; };
 		F03AF1261FDFD1D800A34F2B /* XibTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F03AF1251FDFD1D800A34F2B /* XibTableViewController.m */; };
 		F03AF1291FDFD22900A34F2B /* LayoutHeightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F03AF1281FDFD22900A34F2B /* LayoutHeightCell.m */; };
+		F099ABA11FE2543B00CBF735 /* UIView+TExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F099ABA01FE2543B00CBF735 /* UIView+TExtension.m */; };
+		F099ABA51FE2708500CBF735 /* DemoVC0.m in Sources */ = {isa = PBXBuildFile; fileRef = F099ABA41FE2708500CBF735 /* DemoVC0.m */; };
 		F0F02F5C1FE0C39D00AC28F6 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = F0F02F5B1FE0C39D00AC28F6 /* data.json */; };
 		F0F02F5F1FE0C42A00AC28F6 /* LayoutCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F02F5E1FE0C42A00AC28F6 /* LayoutCellModel.m */; };
 		F0F02F621FE0D41100AC28F6 /* AutoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F02F611FE0D41100AC28F6 /* AutoTableViewController.m */; };
@@ -39,6 +41,10 @@
 		F03AF1251FDFD1D800A34F2B /* XibTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XibTableViewController.m; sourceTree = "<group>"; };
 		F03AF1271FDFD22900A34F2B /* LayoutHeightCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LayoutHeightCell.h; sourceTree = "<group>"; };
 		F03AF1281FDFD22900A34F2B /* LayoutHeightCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LayoutHeightCell.m; sourceTree = "<group>"; };
+		F099AB9F1FE2543B00CBF735 /* UIView+TExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+TExtension.h"; sourceTree = "<group>"; };
+		F099ABA01FE2543B00CBF735 /* UIView+TExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+TExtension.m"; sourceTree = "<group>"; };
+		F099ABA31FE2708500CBF735 /* DemoVC0.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoVC0.h; sourceTree = "<group>"; };
+		F099ABA41FE2708500CBF735 /* DemoVC0.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoVC0.m; sourceTree = "<group>"; };
 		F0C6E6991FD4E96400BC4BD8 /* MacroDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacroDefinition.h; sourceTree = "<group>"; };
 		F0C6E69A1FD4E96400BC4BD8 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		F0F02F5B1FE0C39D00AC28F6 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
@@ -89,6 +95,7 @@
 				F0F02F5B1FE0C39D00AC28F6 /* data.json */,
 				9DEA2C941FC2F2A000541011 /* AppDelegate.h */,
 				9DEA2C951FC2F2A000541011 /* AppDelegate.m */,
+				F099AB9D1FE252E000CBF735 /* Vender */,
 				F0F02F631FE1136C00AC28F6 /* Classes */,
 				F03AF1221FDFD19C00A34F2B /* class */,
 				F0C6E6981FD4E96400BC4BD8 /* Configuration */,
@@ -104,6 +111,7 @@
 				9DEA2C981FC2F2A000541011 /* AutoLayoutViewController.m */,
 				F0F02F601FE0D41100AC28F6 /* AutoTableViewController.h */,
 				F0F02F611FE0D41100AC28F6 /* AutoTableViewController.m */,
+				F099ABA21FE2704C00CBF735 /* DemoVC0 */,
 			);
 			path = AutoLayout;
 			sourceTree = "<group>";
@@ -128,6 +136,24 @@
 				F0F02F5E1FE0C42A00AC28F6 /* LayoutCellModel.m */,
 			);
 			path = XIB;
+			sourceTree = "<group>";
+		};
+		F099AB9D1FE252E000CBF735 /* Vender */ = {
+			isa = PBXGroup;
+			children = (
+				F099AB9F1FE2543B00CBF735 /* UIView+TExtension.h */,
+				F099ABA01FE2543B00CBF735 /* UIView+TExtension.m */,
+			);
+			path = Vender;
+			sourceTree = "<group>";
+		};
+		F099ABA21FE2704C00CBF735 /* DemoVC0 */ = {
+			isa = PBXGroup;
+			children = (
+				F099ABA31FE2708500CBF735 /* DemoVC0.h */,
+				F099ABA41FE2708500CBF735 /* DemoVC0.m */,
+			);
+			path = DemoVC0;
 			sourceTree = "<group>";
 		};
 		F0C6E6971FD4E91F00BC4BD8 /* Support File */ = {
@@ -238,9 +264,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F099ABA51FE2708500CBF735 /* DemoVC0.m in Sources */,
 				9DEA2C991FC2F2A000541011 /* AutoLayoutViewController.m in Sources */,
 				F0F02F6F1FE1136C00AC28F6 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
 				F0F02F5F1FE0C42A00AC28F6 /* LayoutCellModel.m in Sources */,
+				F099ABA11FE2543B00CBF735 /* UIView+TExtension.m in Sources */,
 				F03AF1291FDFD22900A34F2B /* LayoutHeightCell.m in Sources */,
 				9DEA2CA41FC2F2A000541011 /* main.m in Sources */,
 				F0F02F621FE0D41100AC28F6 /* AutoTableViewController.m in Sources */,

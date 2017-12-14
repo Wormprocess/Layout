@@ -75,7 +75,6 @@
     NSLayoutConstraint * view3_top = [NSLayoutConstraint constraintWithItem:view3 attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeTop multiplier:1 constant:10];
     
     NSLayoutConstraint * height1 = [NSLayoutConstraint constraintWithItem:view2 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:view1 attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
-    
     NSLayoutConstraint * height2 = [NSLayoutConstraint constraintWithItem:view3 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:view1 attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
     
     [superview addConstraints:@[view1_left,view2_left,view3_left,view3_right,width1,width2]];

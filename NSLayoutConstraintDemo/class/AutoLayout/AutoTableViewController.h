@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface AutoTableViewController : UIViewController
-
+{
+    UIButton * youbtn;
+}
 @end
