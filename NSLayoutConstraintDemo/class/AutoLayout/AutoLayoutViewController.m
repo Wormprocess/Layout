@@ -56,6 +56,7 @@
     
     NSLayoutConstraint * view2_left = [NSLayoutConstraint constraintWithItem:view2 attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:view1 attribute:NSLayoutAttributeRight multiplier:1 constant:10];
     
+    
     NSLayoutConstraint * view3_left = [NSLayoutConstraint constraintWithItem:view3 attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:view2 attribute:NSLayoutAttributeRight multiplier:1 constant:10];
     
     NSLayoutConstraint * view3_right = [NSLayoutConstraint constraintWithItem:view3 attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeRight multiplier:1 constant:-10];

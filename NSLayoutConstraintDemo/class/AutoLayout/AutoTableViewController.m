@@ -62,6 +62,10 @@
     return cell;
 }
 
+//UITableView+FDTemplateLayoutCell 的原理
+//在tableview 返回行高的代理里面就先创建了cell在设置cell的内容再通过系统的[cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height 获取到高度返回
+//利用runtime 缓存高度
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [tableView fd_heightForCellWithIdentifier:@"cell" cacheByKey:[NSString stringWithFormat:@"indepath_row%ld",(long)indexPath.row] configuration:^(LayoutHeightCell * cell) {
