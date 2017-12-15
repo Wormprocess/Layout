@@ -14,11 +14,17 @@
 @property (nonatomic,weak) UIView * view1;
 @property (nonatomic,weak) UIView * view2;
 @property (nonatomic,weak) UIView * view3;
-
+@property (nonatomic,strong) NSLayoutConstraint * view0_width;
+@property (nonatomic,strong) NSTimer * time;
 @end
 
 @implementation DemoVC0
-
+- (void)dealloc
+{
+    [self.time invalidate];
+    self.time = nil;
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -50,33 +56,43 @@
     self.view3.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self createLayoutConstraint];
+    T_WeakSelf(self);
+    self.time = [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        [weakself startAnimation];
+    }];
+    
+}
+
+- (void)startAnimation
+{
+    if (self.view0_width.constant == 10.0) {
+        self.view0_width.constant = 100.0;
+    }else{
+        self.view0_width.constant = 10.0;
+    }
+    [UIView animateWithDuration:1 animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 - (void)createLayoutConstraint
 {
     NSLayoutConstraint * view0_top = [NSLayoutConstraint constraintWithItem:self.view0 attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:60];
-    view0_top.active = YES;
     NSLayoutConstraint * view0_left = [NSLayoutConstraint constraintWithItem:self.view0 attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1 constant:20];
-    view0_left.active = YES;
     NSLayoutConstraint * view0_width = [NSLayoutConstraint constraintWithItem:self.view0 attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:100];
-    view0_width.active = YES;
     view0_width.identifier = @"width";
     NSLayoutConstraint * view0_height = [NSLayoutConstraint constraintWithItem:self.view0 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:100];
-    view0_height.active = YES;
+    self.view0_width = view0_width;
+    [self.view addConstraints:@[view0_top,view0_left,view0_width,view0_height]];
+    //addConstraints之后  active就被激活了。可以手动设置active为yes，可以不用addConstraints也有效。例如view0_height.active = YES;后self.view就不用添加view0_height也会有效
     
-//    [self.view addConstraints:@[view0_top,view0_left,view0_width,view0_height]];
+    
+    NSString * view1_Hvfl = @"H:[view0]-10-[view1(==view0)]-10-[view2(50)]";
+    NSDictionary * views = @{@"view0":self.view0,@"view1":self.view1,@"view2":self.view2};
+    NSArray * constrs = [NSLayoutConstraint constraintsWithVisualFormat:view1_Hvfl options:NSLayoutFormatAlignAllTop|NSLayoutFormatAlignAllBottom metrics:nil views:views];
+    [self.view addConstraints:constrs];
+    
 }
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [self.view0.constraints enumerateObjectsUsingBlock:^(__kindof NSLayoutConstraint * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj.identifier isEqualToString:@"width"]) {
-            obj.constant = 10;
-            *stop = YES;
-        }
-    }];
-    [UIView animateWithDuration:0.5 animations:^{
-        [self.view layoutIfNeeded];
-    }];
-}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

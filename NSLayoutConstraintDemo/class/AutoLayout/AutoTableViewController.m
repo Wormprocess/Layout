@@ -74,7 +74,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [tableView fd_heightForCellWithIdentifier:@"cell" cacheByKey:[NSString stringWithFormat:@"indepath_row%ld",(long)indexPath.row] configuration:^(LayoutHeightCell * cell) {
+    return [tableView fd_heightForCellWithIdentifier:@"cell" cacheByIndexPath:indexPath configuration:^(LayoutHeightCell * cell) {
         cell.model = self.dataArray[indexPath.row];
     }];
 }

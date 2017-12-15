@@ -132,13 +132,15 @@
     [self setupVFL];
     
     UIButton * btn = [[UIButton alloc]init];
-    [btn setTitle:@"NEXT" forState:UIControlStateNormal];
+    [btn setTitle:@"NEXTNEXTNEXT" forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"sunnyxx"] forState:UIControlStateNormal];
+    btn.backgroundColor = [UIColor cyanColor];
     [self.view addSubview:btn];
     btn.translatesAutoresizingMaskIntoConstraints = NO;
     [btn addTarget:self action:@selector(next) forControlEvents:UIControlEventTouchUpInside];
     
-    NSString * btnH_VFL = @"H:[btn(100)]-10-|";
-    NSString * btnV_VFL = @"V:[btn(40)]-100-|";
+    NSString * btnH_VFL = @"H:[btn]-10-|";
+    NSString * btnV_VFL = @"V:[btn]-100-|";
     NSDictionary * views = NSDictionaryOfVariableBindings(btn);
     NSArray * h_layout = [NSLayoutConstraint constraintsWithVisualFormat:btnH_VFL options:0 metrics:nil views:views];
     NSArray * v_layout = [NSLayoutConstraint constraintsWithVisualFormat:btnV_VFL options:0 metrics:nil views:views];
@@ -149,7 +151,7 @@
     //居中的方法,居中偏移还没有找到
     
 #warning 水平反向约束时对齐方式options选top,bottom,cententY或为0，竖直方向反之
-    
+    /*
     UIButton * next = [UIButton buttonWithType:UIButtonTypeCustom];
     [next setTitle:@"next" forState:UIControlStateNormal];
     next.backgroundColor = [UIColor blueColor];
@@ -176,7 +178,7 @@
     
     [self.view addConstraints:h_vfl];
     [self.view addConstraints:v_vfl];
-    
+    */
 
 }
 
